@@ -1,0 +1,1 @@
+export const WED_URL='mongodb+srv://vishnu-varma-9786-wed:vishnu9786@wed.2ikpktg.mongodb.net/wed_collections?appName=wed'
