@@ -46,17 +46,27 @@ app.use(cookieParser());
 app.use(express.json());
 
 // ----------------------------
-// 🚀 Handle favicon requests
-// ----------------------------
-app.get('/favicon.ico', (req, res) => res.sendStatus(204));
-
-// ----------------------------
-// Static files
+// 🚀 Serve static files
 // ----------------------------
 app.use("/uploads", express.static(path.join("uploads")));
+app.use(express.static(path.join(path.resolve(), "public"))); // public folder for favicon, etc.
 
 // ----------------------------
-// Routes
+// 🚀 Handle favicon requests
+// ----------------------------
+app.get(['/favicon.ico', '/favicon.png'], (req, res) => {
+    res.sendFile(path.join(path.resolve(), 'public', 'favicon.ico'));
+});
+
+// ----------------------------
+// 🚀 Root route to prevent 404
+// ----------------------------
+app.get('/', (req, res) => {
+    res.send({ message: 'Welcome to the Wedding Events API!' });
+});
+
+// ----------------------------
+// 🚀 Routes
 // ----------------------------
 app.use("/type", typeroute);
 app.use("/gallery", galleryroute);
