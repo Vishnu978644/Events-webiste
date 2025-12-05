@@ -36,20 +36,28 @@ const app = express();
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://functions-git-main-vishnus-projects-78d92359.vercel.app",  // backend
-        "https://functions-sand-seven.vercel.app"  // ✅ your frontend
+        "https://functions-git-main-vishnus-projects-78d92359.vercel.app",
+        "https://functions-sand-seven.vercel.app"
     ],
     credentials: true
 }));
 
-
 app.use(cookieParser());
 app.use(express.json());
 
+// ----------------------------
+// 🚀 Handle favicon requests
+// ----------------------------
+app.get('/favicon.ico', (req, res) => res.sendStatus(204));
+
+// ----------------------------
 // Static files
+// ----------------------------
 app.use("/uploads", express.static(path.join("uploads")));
 
+// ----------------------------
 // Routes
+// ----------------------------
 app.use("/type", typeroute);
 app.use("/gallery", galleryroute);
 app.use("/bgallery", bgalleryroute);
